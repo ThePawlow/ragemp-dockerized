@@ -9,16 +9,15 @@ EXPOSE 22006
 # ------------------------
 # Install Dependencies
 # ------------------------
-RUN apt update && \
-    apt install wget gcc libunwind8 icu-devtools curl libssl-dev procps libc6 libgcc-s1 libgssapi-krb5-2 libicu72 libssl3 libstdc++6 zlib1g libicu-dev libatomic1 -y && \
+RUN SERVERFILES="/opt/ragemp" && apt update && \
+    apt install wget gcc libunwind8 icu-devtools curl libssl3 libssl-dev procps -y && \
     wget -O /tmp/server.tar.gz https://cdn.rage.mp/updater/prerelease/server-files/linux_x64.tar.gz && \
 	tar -xzf /tmp/server.tar.gz -C /tmp && \
-	mkdir /serverfiles && \
-	mv /tmp/ragemp-srv/ragemp-server /serverfiles/ragemp-server && \
-	mv /tmp/ragemp-srv/bin /serverfiles/bin && \
-    mv /tmp/ragemp-srv/dotnet /serverfiles/dotnet && \
-	chmod +x /serverfiles/ragemp-server && \
-	mkdir /ragemp 
+	mkdir $SERVERFILES && \
+	mv /tmp/ragemp-srv/ragemp-server $SERVERFILES/ragemp-server && \
+	mv /tmp/ragemp-srv/bin $SERVERFILES/bin && \
+    mv /tmp/ragemp-srv/dotnet $SERVERFILES/dotnet && \
+	chmod +x $SERVERFILES/ragemp-server
 
 # ------------------------
 # Optional .NET Installation (Only if DOTNET=true)
@@ -33,9 +32,14 @@ RUN if [ "$DOTNET" = "true" ]; then \
     rm -rf /var/lib/apt/lists/*; \
 fi
 
-ADD entrypoint.sh /home/entrypoint.sh
-ADD conf.json /serverfiles/conf.json
+ADD entrypoint.sh /opt/ragemp/entrypoint.sh
+ADD conf.json /opt/ragemp/conf.json
 
-VOLUME /ragemp
+#VOLUME /ragemp
 
-ENTRYPOINT ["sh", "/home/entrypoint.sh"]
+RUN useradd -m -d /opt/ragemp -s /usr/sbin/nologin ragempuser && \
+    chown -R ragempuser:ragempuser /opt/ragemp
+USER ragempuser
+WORKDIR /opt/ragemp
+
+ENTRYPOINT ["sh", "/opt/ragemp/entrypoint.sh"]
