@@ -21,9 +21,11 @@ Files you might want to mount
 
 ## Known Issues
 **Couldn't find a valid ICU package installed on the system.**
+
 Set environment-value DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=1
 
 **No usable version of libssl was found**
+
 Set in docker-compose tty: true
 
 ## Credits
