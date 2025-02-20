@@ -1,8 +1,25 @@
-# Build without .NET
-# Size 684 MB
-docker build --build-arg DOTNET=false -t ragemp-dockerized:latest -t ragemp-dockerized:v1.0 .
+# Dockerized RageMP Server
+## Usage
+https://hub.docker.com/r/thepavlov/ragemp-dockerized
 
-# Build with .NET
-# Size 763 MB
-# Difference of 79 MB
-docker build --build-arg DOTNET=true -t ragemp-dockerized:latest-dotnet -t ragemp-dockerized:v1.0-dotnet .
+```
+docker pull thepavlov/ragemp-dockerized
+```
+## With or without DotNet. You decide!
+**Without DotNet** latest
+
+**With DotNet** latest-dotnet*
+
+_*runs .NET 8.0 LTS for security reasons_
+
+## Mounting
+Server Files are under **/opt/ragemp/**
+
+Files you might want to mount
+- /opt/ragemp/resources
+- /opt/ragemp/conf.json
+
+## Credits
+Based off https://github.com/BamButz/docker-ragemp
+
+Edited to be more secure and support DotNet
