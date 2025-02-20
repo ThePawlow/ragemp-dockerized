@@ -19,7 +19,14 @@ Files you might want to mount
 - /opt/ragemp/resources
 - /opt/ragemp/conf.json
 
+## Known Issues
+**Couldn't find a valid ICU package installed on the system.**
+Set environment-value DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=1
+
+**No usable version of libssl was found**
+Set in docker-compose tty: true
+
 ## Credits
-Based off https://github.com/BamButz/docker-ragemp
+Based of https://github.com/BamButz/docker-ragemp
 
 Edited to be more secure and support DotNet
