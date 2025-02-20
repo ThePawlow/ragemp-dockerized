@@ -49,4 +49,5 @@ else
 fi
 
 echo "Run Server"
+cd /ragemp
 /ragemp/ragemp-server

@@ -10,7 +10,7 @@ EXPOSE 22006
 # Install Dependencies
 # ------------------------
 RUN apt update && \
-    apt install wget gcc libunwind8 icu-devtools curl libssl-dev procps libc6 libgcc-s1 libgssapi-krb5-2 libicu72 libssl3 libstdc++6 zlib1g libicu-dev libatomic1  -y && \
+    apt install wget gcc libunwind8 icu-devtools curl libssl-dev procps libc6 libgcc-s1 libgssapi-krb5-2 libicu72 libssl3 libstdc++6 zlib1g libicu-dev libatomic1 -y && \
     wget -O /tmp/server.tar.gz https://cdn.rage.mp/updater/prerelease/server-files/linux_x64.tar.gz && \
 	tar -xzf /tmp/server.tar.gz -C /tmp && \
 	mkdir /serverfiles && \
