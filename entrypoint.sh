@@ -48,6 +48,5 @@ else
 fi
 
 echo "Run Server server"
-ls -la
 cd $SERVERFILES
 $SERVERFILES/ragemp-server

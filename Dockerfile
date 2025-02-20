@@ -28,7 +28,7 @@ RUN if [ "$DOTNET" = "true" ]; then \
     dpkg -i /tmp/packages-microsoft-prod.deb && \
     rm /tmp/packages-microsoft-prod.deb && \
     apt-get update && \
-    apt-get install -y --no-install-recommends dotnet-runtime-9.0 && \
+    apt-get install -y --no-install-recommends dotnet-runtime-8.0 && \
     rm -rf /var/lib/apt/lists/*; \
 fi
 
