@@ -20,9 +20,6 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Set up QEMU (for multi-arch support)
-        uses: docker/setup-qemu-action@v3
-
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
@@ -31,10 +28,8 @@ jobs:
         with:
           context: .
           push: true
-          platforms: linux/amd64,linux/arm64
           tags: |
-            ${{ secrets.DOCKERHUB_USERNAME }}/myimage:latest
-            ${{ secrets.DOCKERHUB_USERNAME }}/myimage:v1.0
+            ${{ secrets.DOCKERHUB_USERNAME }}/ragemp-dockerized:latest
           build-args: DOTNET=false
 
       - name: Build and Push Image (With .NET)
@@ -42,8 +37,6 @@ jobs:
         with:
           context: .
           push: true
-          platforms: linux/amd64,linux/arm64
           tags: |
-            ${{ secrets.DOCKERHUB_USERNAME }}/myimage:latest-dotnet
-            ${{ secrets.DOCKERHUB_USERNAME }}/myimage:v1.0-dotnet
+            ${{ secrets.DOCKERHUB_USERNAME }}/ragemp-dockerized:latest-dotnet
           build-args: DOTNET=true
